@@ -1,4 +1,5 @@
 <% provide(:title, @user.name) %>
+<% provide(:path, user_path) %>
 <div class="row">
   <aside class="col-md-4">
     <section>
@@ -20,7 +21,7 @@
     <% if @user.microposts.any? %>
       <h3>Microposts (<%= @user.microposts.count %>)</h3>
 
-      <%= render partial: 'shared/content_search', locals: { do_path: user_path } %>
+      <%= render 'shared/content_search' %>
 
       <ol class="microposts">
         <%= render @microposts %>

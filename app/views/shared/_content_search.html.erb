@@ -1,6 +1,5 @@
-<!-- do_path は引数利用用 -->
 <p>content serch</p>
-<%= form_tag(do_path, method: :get) do %>
+<%= form_tag(yield(:path), method: :get) do %>
   <p>
     <%= text_field_tag :search, params[:search] %>
     <%= submit_tag "Search", :name => nil %>
