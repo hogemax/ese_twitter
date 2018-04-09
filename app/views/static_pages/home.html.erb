@@ -19,6 +19,9 @@
     </aside>
     <div class="col-md-8">
       <h3>Micropost Feed</h3>
+
+      <%= render partial: 'shared/content_search', locals: { do_path: root_path } %>
+
       <%= render 'shared/feed' %>
     </div>
   </div>

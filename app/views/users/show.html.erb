@@ -19,6 +19,9 @@
     </div>
     <% if @user.microposts.any? %>
       <h3>Microposts (<%= @user.microposts.count %>)</h3>
+
+      <%= render partial: 'shared/content_search', locals: { do_path: user_path } %>
+
       <ol class="microposts">
         <%= render @microposts %>
       </ol>
