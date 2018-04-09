@@ -13,6 +13,10 @@ class User < ApplicationRecord
                                    dependent:   :destroy
   has_many :followers, through: :reverse_relationships, source: :follower
 
+  #scope :name_like, -> name { where('name like ?', "%#{name}%") if name.present? }
+  scope :name_like, -> name { name.present? ? where('name like ?', "%#{name}%") : all }
+
+
   def feed
    # Micropost.where("user_id = ?", id)
     Micropost.from_users_followed_by(self)
@@ -42,6 +46,10 @@ class User < ApplicationRecord
       )
     end
     user
+  end
+
+  def self.search(search)
+    search ? where(['name LIKE ?', "%#{search}%"]) : all
   end
 
   private

@@ -2,7 +2,9 @@ class UsersController < ApplicationController
   before_action :authenticate_user!, :except=>[:show]
   before_action :admin_user,     only: :destroy
   def index
-    @users = User.paginate(page: params[:page])
+    #@users = User.paginate(page: params[:page])
+    @users = User.paginate(page: params[:page]).name_like(params[:search])
+    @searched_text = params[:search]
   end
 
   def show
