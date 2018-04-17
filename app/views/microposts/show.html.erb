@@ -1,0 +1,36 @@
+<div class="row">
+<% if signed_in? %>
+    <aside class="col-md-4">
+      <section>
+        <%= render 'shared/user_info' %>
+      </section>
+      <section>
+        <%= render 'shared/stats' %>
+      </section>
+      <section>
+        <%= render 'shared/micropost_form' %>
+      </section>
+    </aside>
+<% end %>
+
+  <div class="col-md-8">
+    <% if @microposts && @microposts.any? %>
+    <h3>Tag Micropost Feed</h3>
+      <ol class="microposts">
+        <%= render partial: 'shared/micropost', collection: @microposts %>
+      </ol>
+        <%= will_paginate @microposts, renderer: BootstrapPagination::Rails %>
+
+    <% else %>
+    <h3>All Tag</h3>
+      <% if @hashtags.any? %>
+      <ol class="tags">
+        <%= render partial: 'shared/hashtag' %>
+      </ol>
+        <%= will_paginate @hashtags, renderer: BootstrapPagination::Rails %>
+      <% end %>
+    <% end %>
+  </div>
+
+</div>
+

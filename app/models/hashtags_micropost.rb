@@ -1,0 +1,2 @@
+class HashtagsMicropost < ApplicationRecord
+end

@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'microposts/index'
+
   root 'static_pages#home'
   get "contacts/new"
   get "users/show"
@@ -14,7 +16,9 @@ Rails.application.routes.draw do
       get :following, :followers
     end
   end
-  resources :microposts, only: [:create, :destroy]
+#  resources :microposts, only: [:create, :destroy]
+  resources :microposts, except: [:new, :edit, :update]
+  resources :hashtags, only: [:create, :destroy]
   resources :relationships, only: [:create, :destroy]
   resources :contacts, only: [:new, :create]
 end

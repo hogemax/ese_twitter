@@ -3,7 +3,7 @@
   <span class="user">
     <%= link_to feed_item.user.name, feed_item.user %>
   </span>
-  <span class="content"><%= feed_item.content %></span>
+  <span class="content"><%= feed_item.content.html_safe %></span>
 <% if feed_item.image? %>
   <div><%= image_tag feed_item.image_url(:thumb) %></div>
 <% end %>

@@ -1,5 +1,5 @@
 <li>
-  <span class="content"><%= micropost.content %></span>
+  <span class="content"><%= micropost.content.html_safe %></span>
 <% if micropost.image? %>
   <div class="image"><%= image_tag micropost.image_url %></div>
 <% end %>

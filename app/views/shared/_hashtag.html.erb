@@ -1,0 +1,28 @@
+<table>
+<% if params[:id] != "show_all" %>
+  <thead>
+    <tr>
+      <th>ハッシュタグ</th>
+    </tr>
+  </thead>
+<% end %>
+
+  <tbody>
+    <tr>
+    <% if params[:id] != "show_all" %>
+      <td><%= link_to 'すべてのタグ', micropost_path("show_all"), method: :get %></td>
+    <% end %>
+    </tr>
+    <% @hashtags.each do |hashtag| %>
+      <tr>
+        <td>
+          <%= link_to "\##{hashtag.name}", micropost_path(hashtag.name), method: :get %>
+        <% if current_user.admin? %>
+          | <%= link_to "delete", hashtag, method: :delete,
+                                           data: { confirm: "You sure?" } %>
+        <% end %>
+      </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
