@@ -225,6 +225,12 @@ input {
     }
   }
 }
+
+.panel {
+  display: table-cell;
+  padding: 10px;
+}
+
 .content {
   display: block;
 }

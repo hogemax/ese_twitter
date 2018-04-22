@@ -23,5 +23,5 @@
 .byebug_history
 /vendor/bundle
 /.envrc
-/public/uploads/tmpi/
+/public/uploads/tmp/
 /public/uploads/micropost/image/

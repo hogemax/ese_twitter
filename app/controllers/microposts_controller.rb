@@ -7,7 +7,6 @@ class MicropostsController < ApplicationController
     @microposts = Micropost.all
     @micropost = Micropost.new
     @hashtags = Hashtag.all
-
     #redirect_to controller: 'microposts', action: 'show'
   end
 
@@ -45,62 +44,89 @@ class MicropostsController < ApplicationController
     @micropost = current_user.microposts.build(micropost_params)
     str = @micropost.content
     hashTagNames = ""
+    sharpHashTagName = nil
     hashTagName = nil
-    pathHashTag = nil
 
     str.to_s.gsub!(/#/, "\n#")
     str.to_s.gsub!(/(\s|　)+/, "\n")
-#logger.debug "ハッシュタグとスペース 毎に改行"
-#logger.debug "#{str}__;"
+#logger.debug "ハッシュタグとスペース 毎に改行" #logger.debug "#{str}__;"
 
     str.each_line(rs="\n") {|line|
       hashTagNames << line if line.match(/#\S*/)
     }
-#logger.debug "各ハッシュタグ（のData）を表示"
-#logger.debug "#{hashTagNames};"
+#logger.debug "各ハッシュタグ（のData）を表示" #logger.debug "#{hashTagNames};"
 
     if hashTagNames.present?
       exitTag = nil
 
       hashTagNames.each_line {|line|
-        hashTagName = line.to_s.gsub(/(\s|　)+|\R/, '')
-        pathHashTag = hashTagName.sub(/\A#/, "")
+        sharpHashTagName = line.to_s.gsub(/(\s|　)+|\R/, '')
+        hashTagName = sharpHashTagName.sub(/\A#/, "") #先頭の#を削除
 
-        @micropost.content = @micropost.content.sub(/^(?!>)#{hashTagName}/, %Q{<a data-method="get" href="/microposts/#{pathHashTag}">#{hashTagName}</a>}) #ハッシュタグ文字をリンク化
+        @micropost.content = @micropost.content.sub(/^(?!>)#{sharpHashTagName}/, %Q{<a data-method="get" href="/microposts/#{hashTagName}">#{sharpHashTagName}</a>}) #ハッシュタグ文字をリンク化
 
-        hashTagName = hashTagName.sub(/\A#/, "") #先頭の#を削除
-
-        exitTag = Hashtag.find_by(name: hashTagName) # 既に存在しているハッシュタグか確認
+        exitTag = Hashtag.find_by(name: hashTagName)  # 既に存在しているハッシュタグか確認
         if exitTag == nil
-          hashTag = Hashtag.new                      # 存在しなければハッシュタグを新規作成
+          hashTag = Hashtag.new                       # 存在しなければハッシュタグを新規作成
           hashTag.name = hashTagName
-          @micropost.hashtags << hashTag             # ハッシュタグと投稿の関連付け
+          @micropost.hashtags << hashTag              # ハッシュタグと投稿の関連付け
           hashTag.save!
         else
-          @micropost.hashtags << exitTag             # ハッシュタグと投稿の関連付け
+          @micropost.hashtags << exitTag              # ハッシュタグと投稿の関連付け
         end
       }
-      session[:hashtag] = pathHashTag if pathHashTag #ハッシュタグがあればセッションに保存
+      session[:hashtag] = hashTagName if hashTagName  #ハッシュタグがあればセッションに保存
       #session[:hashtag] = exitTag if session[:hashtag]
     else
       session[:hashtag] = nil #ハッシュタグが文中に無ければセッション情報を消す
     end
 
-    @micropost.save ? flash[:success] = "Micropost created!" : @microposts = []
-#logger.debug "DB保存時エラーがあれば表示"
-#logger.debug @micropost.errors.inspect
-
-    if !session[:hashtag]
-      redirect_to root_url, method: 'get'
-    else
-      # そのハッシュタグのツイートのみ表示
-      redirect_to micropost_path(session[:hashtag]), method: 'get'
+    #repostであれば元の投稿を後ろに追記
+    if repost_source_build.present?
+      @micropost.content << %Q{<br /><div class="panel panel-default">#{repost_source_build}</div>}      #logger.debug @micropost.content
     end
+
+
+    if @micropost.save #投稿成功時
+      flash[:success] = "Micropost created!"
+      #リダイレクト先を判定して移動
+      destination = !session[:hashtag] ? root_url : micropost_path(session[:hashtag])
+      redirect_to destination, method: 'get'
+
+    else #投稿失敗時（バリデーションエラー等）
+      @feed_items = []
+      @microposts = []
+      @hashtags = Hashtag.all
+      render session[:hashtag] ? "microposts/#{session[:hashtag]}" : 'static_pages/home'
+    end #logger.debug "DB保存時エラーがあれば表示" #logger.debug @micropost.errors.inspect
+
   end
 
   def destroy
     @micropost.destroy
     redirect_to root_url
+  end
+
+  def repost_source_build
+    sourceContent = nil
+    if params[:post_source]
+      #repost用のデータ取得
+      postSourceId = params[:post_source][:id]
+      originalPost = Micropost.find_by(id: postSourceId)
+      originalUser = User.find_by(id: originalPost.user_id)
+      originalImage = nil
+
+      #画像がある場合の処理
+      if originalPost.image.present?
+        originalImage = %Q{<div><img src="#{originalPost.image}" alt=""></div>}
+      end
+
+      originalPost.content << %Q{<br /><a href="/users/#{originalPost.user_id}">#{originalImage}@#{originalUser.name}</a>}     # logger.debug originalPost.content
+
+      sourceContent = originalPost.content
+    end
+
+    return sourceContent
   end
 
   private

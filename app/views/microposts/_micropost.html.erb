@@ -1,4 +1,4 @@
-<li>
+<li id="<%= micropost.id %>">
   <span class="content"><%= micropost.content.html_safe %></span>
 <% if micropost.image? %>
   <div class="image"><%= image_tag micropost.image_url %></div>
@@ -11,4 +11,7 @@
                                      data: { confirm: "You sure?" },
                                      title: micropost.content %>
   <% end %>
+  <div>
+    <%= render 'layouts/repostbutton' %>
+  </div>
 </li>

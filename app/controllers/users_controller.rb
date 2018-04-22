@@ -11,6 +11,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     #@microposts = @user.microposts.paginate(:page => params[:page])
     @microposts = @user.microposts.paginate(:page => params[:page]).search(params[:search])
+    @micropost = Micropost.new
   end
 
   def destroy

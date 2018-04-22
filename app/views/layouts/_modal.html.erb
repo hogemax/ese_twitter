@@ -1,0 +1,31 @@
+<!-- モーダル -->
+<% if signed_in? %>
+<div class="modal fade" id="repostModal" tabindex="-1" role="dialog" aria-labelledby="repostModalLabel" aria-hidden="true">
+  <div class="modal-dialog  modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header img_cu_lo">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+
+        <h3 class="modal-title" id="repostModalLabel">_</h4>
+        <%= link_to gravatar_for(current_user), current_user %>
+        <%= current_user.name %>
+
+      </div>
+      <div class="modal-body">
+        <%= render 'shared/repost_form' %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>
+
+<!--
+<script>
+//repost.js テスト用記述
+</script>
+-->

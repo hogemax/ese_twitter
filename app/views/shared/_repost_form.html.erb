@@ -1,0 +1,16 @@
+<% if @micropost %>
+  <%= form_for(@micropost) do |f| %>
+    <%= render 'shared/error_messages', object: f.object %>
+    <div class="field">
+      <%= f.text_area :content, placeholder: "Compose new micropost..." %>
+    </div>
+
+    <div class="well">
+      <%= label :post_source, :content, :id =>"repost_source_content" %>
+      <%= image_tag '', :id => 'repost_source_image' %>
+      <%= hidden_field :post_source, :id, :id =>"repost_source_id" %>
+    </div>
+
+    <%= f.submit "Post", class: "btn btn-lg btn-primary" %>
+  <% end %>
+<% end %>
