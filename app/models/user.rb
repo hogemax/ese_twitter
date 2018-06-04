@@ -12,6 +12,7 @@ class User < ApplicationRecord
                                    class_name:  "Relationship",
                                    dependent:   :destroy
   has_many :followers, through: :reverse_relationships, source: :follower
+  has_many :likes, dependent: :destroy
 
   #scope :name_like, -> name { where('name like ?', "%#{name}%") if name.present? }
   scope :name_like, -> name { name.present? ? where('name like ?', "%#{name}%") : all }

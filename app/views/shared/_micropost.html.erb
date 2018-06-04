@@ -3,8 +3,10 @@
   <span class="user">
     <%= link_to micropost.user.name, micropost.user %>
   </span>
-
-  <span class="content"><%= micropost.content.html_safe %></span>
+  <span class="content">
+    <%= render partial: 'shared/micropost_hashtag_conversion', locals: { micropost: micropost } %>
+    <%= render partial: 'shared/micropost_citations_view', locals: { micropost: micropost } %>
+  </span>
 <% if micropost.image? %>
     <div><%= image_tag micropost.image_url(:thumb) %></div>
 <% end %>

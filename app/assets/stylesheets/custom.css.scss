@@ -247,6 +247,24 @@ aside {
     margin-bottom: 5px;
   }
 }
+//いいね、引用投稿 横並び設定
+.reaction_buttons_container {
+  display: flex;
+}
+
+/* like */
+
+.like-button, .un-like-button {
+  padding: 10px;
+  border: none;
+  span {
+    vertical-align: super;
+  }
+}
+
+.fa-red {
+  color: #e54d26;
+}
 
 /* miscellaneous */
 

@@ -1,5 +1,8 @@
 <li id="<%= micropost.id %>">
-  <span class="content"><%= micropost.content.html_safe %></span>
+  <span class="content">
+    <%= render partial: 'shared/micropost_hashtag_conversion', locals: { micropost: micropost } %>
+    <%= render partial: 'shared/micropost_citations_view', locals: { micropost: micropost } %>
+  </span>
 <% if micropost.image? %>
   <div class="image"><%= image_tag micropost.image_url %></div>
 <% end %>
@@ -11,7 +14,8 @@
                                      data: { confirm: "You sure?" },
                                      title: micropost.content %>
   <% end %>
-  <div>
+  <div class="reaction_buttons_container">
+    <%= render partial: 'likes/like', locals: { micropost: micropost, likes: @likes } %>
     <%= render 'layouts/repostbutton' %>
   </div>
 </li>

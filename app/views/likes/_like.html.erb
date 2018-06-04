@@ -1,0 +1,13 @@
+<% if user_signed_in? %>
+  <% if micropost.like_user(current_user.id) %>
+    <%= button_to micropost_like_path(likes, micropost_id: micropost.id), action: "destroy", method: :delete, class: "un-like-button", remote: true do %>   <!-- un-likeボタン  -->
+      <%= fa_icon "star 2x", class: "fa-red" %>
+      <span><%= micropost.likes_count %></span>
+    <% end %>
+  <% else %>
+    <%= button_to micropost_likes_path(micropost), action: "create", method: :post, class: "like-button", remote: true do %>   <!-- likeボタン  -->
+      <%= fa_icon("star 2x") %>
+      <span><%= micropost.likes_count %></span>
+    <% end %>
+  <% end %>
+<% end %>

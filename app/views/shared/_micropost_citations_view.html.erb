@@ -1,0 +1,12 @@
+<% if micropost.citations %>
+  <% micropost.citations.each do |c| %>
+    <% c.source_id %>
+    <br />
+    <div class="panel panel-default">
+      <%= Micropost.find(c.source_id).content %>
+      <br />
+      <% user = User.find(Micropost.find(c.source_id).user_id) %>
+      <%= link_to "@#{user.name}", user %>
+    </div>
+  <% end %>
+<% end %>

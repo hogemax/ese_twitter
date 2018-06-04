@@ -1,0 +1,10 @@
+<% if micropost.hashtags.any? %>
+  <%= micropost.content.gsub(/#.*$/, "") %>
+  <% micropost.hashtags.each do |hashtag| %>
+    <% if micropost.content.match(/##{hashtag.name}/) %>
+      <%= micropost.content.gsub(/^(?!##{hashtag.name}).*$/, "").sub(/##{hashtag.name}/, "#{link_to "##{hashtag.name}", :controller => "microposts", :action => "show", :id => "#{hashtag.name}"}").html_safe %>
+    <% end %>
+  <% end %>
+<% else %>
+  <%= micropost.content %>
+<% end %>

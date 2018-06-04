@@ -1,0 +1,8 @@
+$('.microposts li').on('click','.un-like-button', function(event) {
+  console.log('un-like！')
+//$('.microposts li div form').on('click','button.un-like-button', function(event) {
+//console.log('押した！')
+//console.log($(event.currentTarget).attr('class'))
+//console.log($(event.currentTarget).parent().parent().parent().attr('id'))
+  $(event.currentTarget).parent().replaceWith("<%= j (render partial: 'like', locals: { micropost: @micropost, likes: @likes }) %>");
+})

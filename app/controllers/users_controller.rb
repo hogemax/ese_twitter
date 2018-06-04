@@ -12,6 +12,7 @@ class UsersController < ApplicationController
     #@microposts = @user.microposts.paginate(:page => params[:page])
     @microposts = @user.microposts.paginate(:page => params[:page]).search(params[:search])
     @micropost = Micropost.new
+    @likes = Like.where(micropost_id: params[:micropost_id])
   end
 
   def destroy

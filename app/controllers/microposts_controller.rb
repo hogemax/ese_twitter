@@ -1,7 +1,6 @@
 class MicropostsController < ApplicationController
   before_action :authenticate_user!
   before_action :correct_user,   only: :destroy
-  #before_action :set_micropost, only: [:edit, :update, :destroy] # 「:show」を削除
 
   def index
     @microposts = Micropost.all
@@ -41,29 +40,28 @@ class MicropostsController < ApplicationController
   end
 
   def create
+
     @micropost = current_user.microposts.build(micropost_params)
     str = @micropost.content
     hashTagNames = ""
     sharpHashTagName = nil
     hashTagName = nil
 
+    #投稿内容をハッシュタグごとに段落分けして各ハッシュタグを変数に格納
     str.to_s.gsub!(/#/, "\n#")
     str.to_s.gsub!(/(\s|　)+/, "\n")
-#logger.debug "ハッシュタグとスペース 毎に改行" #logger.debug "#{str}__;"
-
     str.each_line(rs="\n") {|line|
       hashTagNames << line if line.match(/#\S*/)
     }
-#logger.debug "各ハッシュタグ（のData）を表示" #logger.debug "#{hashTagNames};"
 
     if hashTagNames.present?
       exitTag = nil
 
       hashTagNames.each_line {|line|
-        sharpHashTagName = line.to_s.gsub(/(\s|　)+|\R/, '')
-        hashTagName = sharpHashTagName.sub(/\A#/, "") #先頭の#を削除
+        sharpHashTagName = line.to_s.gsub(/(\s|　)+|\R/, '')  #空白を改行に置換え
+        hashTagName = sharpHashTagName.sub(/\A#/, "")         #先頭の#を削除
 
-        @micropost.content = @micropost.content.sub(/^(?!>)#{sharpHashTagName}/, %Q{<a data-method="get" href="/microposts/#{hashTagName}">#{sharpHashTagName}</a>}) #ハッシュタグ文字をリンク化
+       # ハッシュタグリンクは表示するときにリンクに置き換える方式にする
 
         exitTag = Hashtag.find_by(name: hashTagName)  # 既に存在しているハッシュタグか確認
         if exitTag == nil
@@ -81,9 +79,14 @@ class MicropostsController < ApplicationController
       session[:hashtag] = nil #ハッシュタグが文中に無ければセッション情報を消す
     end
 
-    #repostであれば元の投稿を後ろに追記
-    if repost_source_build.present?
-      @micropost.content << %Q{<br /><div class="panel panel-default">#{repost_source_build}</div>}      #logger.debug @micropost.content
+    #repostであれば引用元の投稿情報を紐づける
+    if params[:post_source].present?
+      citation = Citation.new
+      citation.source_id = params[:post_source][:id]  #引用元の投稿IDを取得
+      citation.repost_id = Micropost.last.id + 1      #最新のIDを取得して設定
+      @micropost.citations << citation
+      citation.save!
+     # @micropost.content << %Q{<br /><div class="panel panel-default">#{repost_source_build}</div>}
     end
 
 
@@ -98,35 +101,14 @@ class MicropostsController < ApplicationController
       @microposts = []
       @hashtags = Hashtag.all
       render session[:hashtag] ? "microposts/#{session[:hashtag]}" : 'static_pages/home'
-    end #logger.debug "DB保存時エラーがあれば表示" #logger.debug @micropost.errors.inspect
+    end
 
   end
 
   def destroy
+    @micropost = Micropost.find(params[:id])
     @micropost.destroy
     redirect_to root_url
-  end
-
-  def repost_source_build
-    sourceContent = nil
-    if params[:post_source]
-      #repost用のデータ取得
-      postSourceId = params[:post_source][:id]
-      originalPost = Micropost.find_by(id: postSourceId)
-      originalUser = User.find_by(id: originalPost.user_id)
-      originalImage = nil
-
-      #画像がある場合の処理
-      if originalPost.image.present?
-        originalImage = %Q{<div><img src="#{originalPost.image}" alt=""></div>}
-      end
-
-      originalPost.content << %Q{<br /><a href="/users/#{originalPost.user_id}">#{originalImage}@#{originalUser.name}</a>}     # logger.debug originalPost.content
-
-      sourceContent = originalPost.content
-    end
-
-    return sourceContent
   end
 
   private
