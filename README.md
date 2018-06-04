@@ -1,25 +1,25 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Provision work:
 
-Things you may want to cover:
+* Need items
 
-* Ruby version
+  Ruby version >= 2.5.0
 
-* System dependencies
+* Process
 
-* Configuration
+```
+  git clone --depth 1 https://github.com/hogemax/ese_twitter.git example_test_name
+  bundle install --path vendor/bundle
+  bundle exec rails db:migrate
+  #(bundle exec rake db:migrate)
+```
 
-* Database creation
+* For need item to edit
 
-* Database initialization
+  direnv (get it with homebrew)
 
-* How to run the test suite
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
 # ese_twitter
+
+  Ese = 似非 (mock,sham,simulated,,, end more)
