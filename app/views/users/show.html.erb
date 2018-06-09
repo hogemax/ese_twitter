@@ -31,4 +31,6 @@
   </div>
 </div>
 
+<% if Rails.env.development? %>
 <%= @user.name %>, <%= @user.email %>
+<% end %>
