@@ -4,11 +4,12 @@ Provision work:
 
 * Need items
 
-  Ruby version >= 2.5.0
+  `Ruby` version >= **2.5.0**
 
 * Process
 
 ```
+  # cd project_directory
   git clone --depth 1 https://github.com/hogemax/ese_twitter.git example_test_name
   bundle install --path vendor/bundle
   bundle exec rails db:migrate
