@@ -9,7 +9,7 @@ ja:
     failure:
       already_authenticated: "既にログインしています。"
       inactive: "Your account is not activated yet."
-      invalid: "Invalid email or password."
+      invalid: "無効なメールアドレスまたはパスワードです。"
       locked: "アカウントがロックされています。"
       last_attempt: "あなたのアカウントがロックされる前に、もう1つの試みを持っています。"
       not_found_in_database: "メールアドレスまたはパスワードが無効です。"
@@ -40,13 +40,24 @@ ja:
       signed_up_but_unconfirmed: "確認メールを登録したメールアドレス宛に送信しました。リンクを開いてアカウントを有効にして下さい。"
       update_needs_confirmation: "アカウント情報が更新されました。更新の確認メールを新しいメールアドレス宛に送信しましたので、リンクを開いて更新を有効にして下さい。"
       updated: "アカウントが更新されました。"
+      new: #devise/registrations/new  users/sign_up
+        Sign_up: "アカウント登録"
+        Create_my_account: "アカウントを作成"
     sessions:
       signed_in: "ログインしました。"
       signed_out: "ログアウトしました。"
+      new: #devise/sessions/new    users/sign_in
+        Sign_in: "ログイン"
+        New_user?: "新規登録ですか？"
+        Sign_up_now!: "今すぐ登録する"
     unlocks:
       send_instructions: "アカウントのロックを解除する方法を数分以内にメールでご連絡します。"
       send_paranoid_instructions: "アカウントが存在する場合、ロックを解除する方法をメールでご連絡します。"
       unlocked: "アカウントのロックが解除されました。ログインしています。"
+    shared: #devise/shared    users/sign_up
+      links: #ログインリンク等
+        Log_in: "ログイン"
+        Forgot_your_password?: "パスワードをお忘れですか？"
   errors:
     messages:
       already_confirmed: "は既に登録済みです。ログインしてください"
