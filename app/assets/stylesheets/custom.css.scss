@@ -232,6 +232,10 @@ input {
     .image img {
       width: 100%;
     }
+    //ゴミ箱マークの色設定
+    a.btn.trash_mark {
+        color : #000
+    }
   }
 }
 
