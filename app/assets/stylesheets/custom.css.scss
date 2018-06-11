@@ -169,6 +169,15 @@ aside {
 
 /* forms */
 
+//ユーザー検索フォーム
+.search_form {
+  display: flex;
+  input {
+    //ボタンサイズのずれ調整
+    margin-bottom: 15px;
+  }
+}
+
 input, textarea, select, .uneditable-input {
   border: 1px solid #bbb;
   width: 100%;

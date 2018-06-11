@@ -1,7 +1,5 @@
-<p>content serch</p>
-<%= form_tag(yield(:path), method: :get) do %>
-  <p>
+<p>content search</p>
+<%= form_tag(yield(:path), method: :get, class: "search_form col-xs-13") do %>
     <%= text_field_tag :search, params[:search] %>
-    <%= submit_tag "Search", :name => nil %>
-  </p>
+    <%= submit_tag "Search", :name => nil, :class => "btn btn-info col-xs-4" %>
 <% end %>
