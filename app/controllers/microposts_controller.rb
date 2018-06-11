@@ -106,8 +106,19 @@ class MicropostsController < ApplicationController
   end
 
   def destroy
+    #遷移元の情報を取得
+    ref_path = Rails.application.routes.recognize_path(request.referrer)
+
+    #削除処理
     @micropost = Micropost.find(params[:id])
     @micropost.destroy
+
+    #遷移先の判定
+    if ref_path[:controller] == 'users' && ref_path[:id].present?
+      redirect_to controller: 'users', action: 'show', id: ref_path[:id] and return
+    elsif ref_path[:controller] == 'microposts' && ref_path[:id].present?
+      redirect_to controller: 'microposts', action: 'show', id: ref_path[:id] and return
+    end
     redirect_to root_url
   end
 
