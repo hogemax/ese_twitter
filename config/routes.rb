@@ -16,16 +16,12 @@ Rails.application.routes.draw do
       get :following, :followers
     end
   end
-#  resources :microposts, only: [:create, :destroy]
-#  resources :microposts, except: [:new, :edit, :update] do
   resources :microposts do
-    resources :likes, only: [:create, :destroy]
     member do
       get :reposting
     end
   end
-  #post   '/:micropost_id/likes' => 'likes#create',   as: 'create'
-  #delete '/:micropost_id/likes' => 'likes#destroy', as: 'destroy'
+  resources :likes, only: [:create, :destroy]
 
   resources :hashtags, only: [:create, :destroy]
   resources :relationships, only: [:create, :destroy]

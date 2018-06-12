@@ -1,13 +1,24 @@
-<% if user_signed_in? %>
-  <% if micropost.like_user(current_user.id) %>
-    <%= button_to micropost_like_path(likes, micropost_id: micropost.id), action: "destroy", method: :delete, class: "un-like-button", remote: true do %>   <!-- un-likeボタン  -->
-      <%= fa_icon "star 2x", class: "fa-red" %>
-      <span><%= micropost.likes_count %></span>
+<% if signed_in? %>
+
+<% if current_user != (micropost.user) %>
+<span class="like">
+    <% if micropost.iine?(current_user) %>
+      <%= form_for(micropost.likes.find_by(user_id: current_user.id), method: :delete, remote: true) do |f| %>
+        <%= button_tag(class: "btn btn-xs like-button") do %>
+          <%= fa_icon "star 2x", class: "fa-red" %>
+          <%= content_tag :span, "#{micropost.likes_count}" %>
+        <% end %>
+      <% end %>
+    <% else %>
+      <%= form_for(micropost.likes.build, remote: true) do |f| %>
+        <div><%= hidden_field_tag :micropost_id, micropost.id %></div>
+        <%= button_tag(class: "btn btn-xs un-like-button") do %>
+          <%= fa_icon("star 2x") %>
+          <%= content_tag :span, "#{micropost.likes_count}" %>
+        <% end %>
+      <% end %>
     <% end %>
-  <% else %>
-    <%= button_to micropost_likes_path(micropost), action: "create", method: :post, class: "like-button", remote: true do %>   <!-- likeボタン  -->
-      <%= fa_icon("star 2x") %>
-      <span><%= micropost.likes_count %></span>
-    <% end %>
-  <% end %>
+</span>
+<% end %>
+
 <% end %>

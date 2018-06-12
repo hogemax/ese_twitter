@@ -1,8 +1,1 @@
-$('.microposts li').on('click','.like-button', function(event) {
-  console.log('like！')
-//})
-//$('.microposts li div form').on('click','button.like-button', function(event) {
-//console.log($(event.currentTarget).attr('class'))
-//console.log($(event.currentTarget).parent().parent().parent().attr('id'))
-  $(event.currentTarget).parent().replaceWith("<%= j (render partial: 'like', locals: { micropost: @micropost, likes: @likes, like: @like}) %>");
-})
+$("li#<%= @micropost.id %> div .like").html("<%= escape_javascript(render "likes/like", micropost: @micropost) %>");

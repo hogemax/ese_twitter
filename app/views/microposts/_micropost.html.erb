@@ -11,7 +11,7 @@
   </span>
 
   <div class="reaction_buttons_container">
-    <%= render partial: 'likes/like', locals: { micropost: micropost, likes: @likes } %>
+    <%= render "likes/like", micropost: micropost %>
     <%= render 'layouts/repostbutton' %>
     <%= render 'layouts/deletebutton', occurrence: micropost if current_user == micropost.user %>
   </div>

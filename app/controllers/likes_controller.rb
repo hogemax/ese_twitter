@@ -1,18 +1,29 @@
 class LikesController < ApplicationController
+# 現在未設定↓
+#  before_action :logged_in_user
+
   def create
-    @like = Like.create(user_id: current_user.id, micropost_id: params[:micropost_id])
-    @likes = Like.where(micropost_id: params[:micropost_id])
     @micropost = Micropost.find(params[:micropost_id])
-    # @hashtags = Hashtag.all
-    # @microposts = Micropost.all
+    unless @micropost.iine?(current_user)
+      @micropost.iine(current_user)
+      @micropost.reload
+      respond_to do |format|
+        format.html { redirect_to request.referrer || root_url }
+        format.js
+      end
+    end
   end
 
   def destroy
-    like = Like.find_by(user_id: current_user.id, micropost_id: params[:micropost_id])
-    like.destroy
-    @likes = Like.where(micropost_id: params[:micropost_id])
-    @micropost = Micropost.find(params[:micropost_id])
-    # @hashtags = Hashtag.all
-    # @microposts = Micropost.all
+    @micropost = Like.find(params[:id]).micropost
+    if @micropost.iine?(current_user)
+      @micropost.uniine(current_user)
+      @micropost.reload
+      respond_to do |format|
+        format.html { redirect_to request.referrer || root_url }
+        format.js
+      end
+    end
   end
+
 end
