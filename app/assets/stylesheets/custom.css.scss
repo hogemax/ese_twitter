@@ -263,6 +263,39 @@ aside {
 //いいね、引用投稿 横並び設定
 .reaction_buttons_container {
   display: flex;
+
+  //削除リンク、いいね・引用投稿 各ボタンhover時
+  a.hv_mark_btn:hover,
+  button.hv_mark_btn:hover {
+    position: relative;
+    span.u-hiddenVisually {
+      display: inline;
+    }
+  }
+  //フキダシ内容
+  span.u-hiddenVisually {
+    display: none;
+    position: absolute;
+    top: -40px;
+    left: -10px;
+    padding: 10px;
+    border-radius: 6px;
+    color: #fff;
+    background-color: #333;
+  }
+
+  //フキダシ三角板
+  span.u-hiddenVisually:after {
+    top: 100%;
+	  left: 50%;
+	  border: solid transparent;
+    content: " ";
+    position: absolute;
+    pointer-events: none;
+    border-top-color: #333;
+    border-width: 5px;
+    margin-left: -5px;
+  }
 }
 
 /* like */

@@ -1,8 +1,10 @@
 <% if signed_in? %>
 
 <!-- モーダル表示用のボタン -->
-<button type="button" class="btn img_cu_btn" data-toggle="modal" data-whatever="micropost" data-target="#repostModal">
+<button type="button" class="btn img_cu_btn hv_mark_btn" data-toggle="modal" data-whatever="micropost" data-target="#repostModal">
   <%= fa_icon 'retweet 2x' %>
+  <span class="u-hiddenVisually">引用投稿</span>
 </button>
+
 
 <% end %>

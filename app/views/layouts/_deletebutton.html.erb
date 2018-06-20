@@ -1,6 +1,7 @@
 <!-- モーダル表示用のボタン -->
 <%= link_to occurrence, method: :delete, data: { confirm: "投稿を削除してよろしいですか？" },
                                       title: occurrence.content,
-                                      class: 'btn trash_mark' do %>
+                                      class: 'btn trash_mark hv_mark_btn' do %>
   <%= fa_icon 'trash 2x' %>
+  <span class="u-hiddenVisually">投稿を削除</span>
 <% end %>
