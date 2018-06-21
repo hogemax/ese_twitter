@@ -6,11 +6,11 @@ Provision work:
 
   `Ruby` version >= **2.5.0**
 
-* Process
+* Install Process
 
 ```
   # cd project_directory
-  git clone --depth 1 https://github.com/hogemax/ese_twitter.git example_test_name
+  git clone --depth 1 https://github.com/hogemax/Simple-SNS.git example_test_name
   bundle install --path vendor/bundle
   bundle exec rails db:migrate
 
@@ -22,7 +22,3 @@ Provision work:
 
   direnv (get it with homebrew)
 
-
-# ese_twitter
-
-  Ese = 似非 (mock,sham,simulated,,, end more)
