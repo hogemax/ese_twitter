@@ -3,7 +3,7 @@
     <% c.source_id %>
     <br />
     <div class="panel panel-default">
-      <%= Micropost.find(c.source_id).content %>
+      <%= render partial: 'shared/micropost_hashtag_conversion', locals: { micropost: Micropost.find(c.source_id) } %>
       <br />
       <% user = User.find(Micropost.find(c.source_id).user_id) %>
       <%= link_to "@#{user.name}", user %>
