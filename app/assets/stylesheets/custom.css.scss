@@ -288,7 +288,7 @@ aside {
   span.u-hiddenVisually:after {
     top: 100%;
 	  left: 50%;
-	  border: solid transparent;
+    border: solid transparent;
     content: " ";
     position: absolute;
     pointer-events: none;
@@ -297,6 +297,39 @@ aside {
     margin-left: -5px;
   }
 }
+
+//postボタンの見た目 通常
+.postButtonDefault {
+  pointer-events: none;
+  opacity: 0;
+  transition: 0.7s all ease-in 0.2s;
+}
+//postボタンの見た目変化用
+.postButtonDefault.btnAttractAttentionOne {
+  pointer-events: visible;
+  opacity: 1;
+  font-weight: bold;
+}
+
+//グラデーション1
+.gradientStyleOne {
+  background: linear-gradient(-75deg, #EE7752, #E73C7E, #23A6D5, #23D5AB);
+  background-size: 800% 800%;
+  animation: GradationOne 3s ease infinite;
+}
+//グラデーション1用アニメーション設定
+@keyframes GradationOne {
+  0% {
+    background-position: 0% 40%
+  }
+  50% {
+    background-position: 100% 30%
+  }
+  100% {
+    background-position: 0% 60%
+  }
+}
+
 
 /* like */
 

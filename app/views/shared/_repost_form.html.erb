@@ -2,7 +2,7 @@
   <%= form_for(@micropost) do |f| %>
     <%= render 'shared/error_messages', object: f.object %>
     <div class="field">
-      <%= f.text_area :content, placeholder: "Compose new micropost..." %>
+      <%= f.text_area :content, placeholder: "新しい投稿内容を入力..." %>
     </div>
 
     <div class="well">
@@ -11,6 +11,6 @@
       <%= hidden_field :post_source, :id, :id =>"repost_source_id" %>
     </div>
 
-    <%= f.submit "Post", class: "btn btn-lg btn-primary" %>
+    <%= f.submit "投稿する", class: "btn btn-lg btn-primary postButtonDefault" %>
   <% end %>
 <% end %>
