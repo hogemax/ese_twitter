@@ -16,10 +16,11 @@ $(document).on('turbolinks:load', function() { //$(function(){
     var post_image
     //画像の取得
     (post_itself.find('div').find('img')) ? post_image = post_itself.find('div').find('img').attr('src'): post_image = "";
-    var recipient = button.data('whatever') //data-whatever の値を取得
+    //var recipient = button.data('whatever') //data-whatever の値を取得
 
     var modal = $(this)  //モーダルを取得
-    modal.find('.modal-title').text('Repost of ' + recipient) //モーダルのタイトルに値を表示
+    //modal.find('.modal-title').text('Repost of ' + recipient) //モーダルのタイトルに値を表示
+    modal.find('.modal-title').text('Repost') //モーダルのタイトルを設定
     var modal_source_div = modal.find('div.modal-body').find('div.well')
     modal_source_div.find('#repost_source_content').text(post_content)
     modal_source_div.find('#repost_source_id').val(post_id)
