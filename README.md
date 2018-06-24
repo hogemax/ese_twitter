@@ -2,8 +2,8 @@
 
 ## Requirement
 
-  `Ruby` version >= **2.5.0**
-  **[Cloudinary](https://cloudinary.com/)** Account (for env_production)
+  - `Ruby` version >= **2.5.0**
+  - **[Cloudinary](https://cloudinary.com/)** Account (for env_production)
 
 ## Installation
 
