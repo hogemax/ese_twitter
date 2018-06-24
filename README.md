@@ -45,9 +45,9 @@ export CLOUDINARY_API_SECRET="xxxxxxxxxxxxx"
 $ bundle exec rails s
 ```
 
-# In the case of Heroku
+## In the case of Heroku
 
-## Environment variable
+### Environment variable
 
 - CLOUDINARY_CLOUD_NAME
 - CLOUDINARY_API_KEY
