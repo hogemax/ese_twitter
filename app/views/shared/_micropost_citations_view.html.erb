@@ -10,7 +10,7 @@
       <% repostImage = Micropost.find(c.source_id) %>
       <% if repostImage.image? %>
         <% thumbnailSize = current_page?(root_path) ? repostImage.image_url(:thumb) : repostImage.image_url %>
-        <%= if Rails.env.production? %>
+        <% if Rails.env.production? %>
           <div><%= cl_image_tag(thumbnailSize) %></div>
         <% else %>
           <div><%= image_tag thumbnailSize %></div>

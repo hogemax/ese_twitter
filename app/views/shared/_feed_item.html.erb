@@ -8,7 +8,7 @@
     <%= render partial: 'shared/micropost_citations_view', locals: { micropost: feed_item } %>
   </span>
 <% if feed_item.image? %>
-  <%= if Rails.env.production? %>
+  <% if Rails.env.production? %>
     <div><%= cl_image_tag(feed_item.image_url(:thumb)) %></div>
   <% else %>
     <div><%= image_tag feed_item.image_url(:thumb) %></div>
