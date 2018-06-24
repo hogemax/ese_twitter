@@ -4,7 +4,11 @@
     <%= render partial: 'shared/micropost_citations_view', locals: { micropost: micropost } %>
   </span>
 <% if micropost.image? %>
-  <div class="image"><%= image_tag micropost.image_url %></div>
+  <%= if Rails.env.production? %>
+    <div class="image"><%= cl_image_tag(micropost.image_url) %></div>
+  <% else %>
+    <div class="image"><%= image_tag micropost.image_url %></div>
+  <% end %>
 <% end %>
   <span class="timestamp">
     <%= time_ago_in_words(micropost.created_at) %>前
