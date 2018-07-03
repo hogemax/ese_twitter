@@ -15,6 +15,6 @@ class ContactMailer < ApplicationMailer
   #管理者（自分）にメール送信
   def sent_to_owner(contact)
     @contact = contact
-    mail(to: mail.from, subject: "お問い合わせがありました。")
+    mail(to: mail.from, subject: "[#{Rails.env}]お問い合わせがありました。")
   end
 end
