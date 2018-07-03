@@ -1,3 +1,6 @@
+<% t = Time.new %>
+<%= t.strftime("%Y年 %m月%d日 %H:%M") %>
+---
 以下の内容でお問い合わせ頂きました。
 
 =======================
@@ -13,3 +16,10 @@
 お問い合わせ内容
 <%= @contact.content %>
 =======================
+
+Simple SNS
+<% if Rails.env.production? %>
+<%= ENV["SITE_URL"] %>
+<% else %>
+https://github.com/hogemax/Simple-SNS
+<% end %>

@@ -1,5 +1,24 @@
-<h1>Contact#sent</h1>
+<h1>お問い合わせありがとうございます。</h1>
 
 <p>
-  <%= @greeting %>, find me in app/views/contact_mailer/sent.html.erb
+  以下の内容でお問い合わせを承りました。<br>
+  管理者からの連絡をお待ちください。
 </p>
+
+<div>
+=======================<br>
+お名前<br>
+<%= @contact.name %><br>
+<br>
+年齢<br>
+<%= @contact.age %><br>
+<br>
+メールアドレス<br>
+<%= @contact.email %><br>
+<br>
+お問い合わせ内容<br>
+<%= @contact.content %><br>
+=======================<br>
+<br>
+<a href="<%= ENV["SITE_URL"] %>">Simple SNS</a>
+</div>
