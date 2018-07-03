@@ -9,7 +9,9 @@ class ContactMailer < ApplicationMailer
   #問い合わせ相手にメール送信
   def sent(contact)
     @contact = contact
-    mail(to: @contact.email, subject: "お問い合わせありがとうございます。[自動返信メール]")
+    mail(to: @contact.email, subject: "お問い合わせありがとうございます。[自動返信メール]") #do |format|
+    #  format.text
+    #end
   end
 
   #管理者（自分）にメール送信
