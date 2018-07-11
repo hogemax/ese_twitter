@@ -23,4 +23,9 @@ module ApplicationHelper
         flash_type.to_s
     end
   end
+
+  def return_url(urlwords, viewwords)
+    return "<a href=\"#{urlwords}\">#{viewwords}</a>"
+  end
+
 end
