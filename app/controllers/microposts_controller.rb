@@ -110,7 +110,8 @@ class MicropostsController < ApplicationController
     ref_path = Rails.application.routes.recognize_path(request.referrer)
 
     #削除処理
-    @micropost = Micropost.find(params[:id])
+    #@micropost = Micropost.find(params[:id])
+    @micropost = Micropost.search_by_id(params[:id])
     @micropost.destroy
 
     #遷移先の判定

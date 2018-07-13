@@ -1,14 +1,16 @@
 class Micropost < ApplicationRecord
   mount_uploader :image, ImageUploader
   belongs_to :user
+  has_and_belongs_to_many :hashtags
+
   default_scope -> { order('created_at DESC') }
+  scope :search_by_id, ->(post_id) { find_by(id: post_id) }
+
   validates :content, presence: true, length: { maximum: 540 }
   validates :user_id, presence: true
 
-  has_and_belongs_to_many :hashtags
   has_many :likes, dependent: :destroy
   has_many :iine_users, through: :likes, source: :user
-
   has_many :citations, foreign_key: "repost_id", dependent: :destroy
   has_many :reposted_microposts, through: :citations, source: :repost
 

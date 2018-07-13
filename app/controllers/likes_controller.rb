@@ -2,7 +2,8 @@ class LikesController < ApplicationController
   before_action :logged_in_user
 
   def create
-    @micropost = Micropost.find(params[:micropost_id])
+    #@micropost = Micropost.find(params[:micropost_id])
+    @micropost = Micropost.search_by_id(params[:micropost_id])
     unless @micropost.iine?(current_user)
       @micropost.iine(current_user)
       @micropost.reload
