@@ -13,7 +13,6 @@ class MicropostsController < ApplicationController
     if params[:id] == "show_all"
       show_tag_view
     else
-      #hashTag = Hashtag.find_by(id: params[:id])
       hashTag = Hashtag.find_by(name: params[:id])
       if hashTag == nil || hashTag.microposts.empty?         # 「:id」でハッシュタグを検索
         session[:hashtag] = nil                              # 存在しなければindexへリダイレクト
@@ -23,8 +22,7 @@ class MicropostsController < ApplicationController
         session[:hashtag] = params[:id]                      # ハッシュタグが存在すれば
 
         # そのハッシュタグのツイートを全て取得
-        #@microposts = Micropost.joins(:hashtags).where(hashtags: { id: params[:id] }).paginate(page: params[:page])
-        @microposts = Micropost.joins(:hashtags).where(hashtags: { name: params[:id] }).paginate(page: params[:page])
+        @microposts = Micropost.joins(:hashtags).where(hashtags: { name: params[:id] }).includes(:user).paginate(page: params[:page])
 
         show_tag_view
       end
@@ -110,7 +108,6 @@ class MicropostsController < ApplicationController
     ref_path = Rails.application.routes.recognize_path(request.referrer)
 
     #削除処理
-    #@micropost = Micropost.find(params[:id])
     @micropost = Micropost.search_by_id(params[:id])
     @micropost.destroy
 

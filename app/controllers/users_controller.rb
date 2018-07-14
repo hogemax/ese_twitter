@@ -2,15 +2,13 @@ class UsersController < ApplicationController
   before_action :authenticate_user!, :except=>[:show]
   before_action :admin_user,     only: :destroy
   def index
-    #@users = User.paginate(page: params[:page])
     @users = User.paginate(page: params[:page]).name_like(params[:search])
     @searched_text = params[:search]
   end
 
   def show
     @user = User.find(params[:id])
-    #@microposts = @user.microposts.paginate(:page => params[:page])
-    @microposts = @user.microposts.paginate(:page => params[:page]).search(params[:search])
+    @microposts = @user.microposts.includes(:hashtags, :citations).paginate(:page => params[:page]).search(params[:search])
     @micropost = Micropost.new
     @likes = Like.where(micropost_id: params[:micropost_id])
   end
