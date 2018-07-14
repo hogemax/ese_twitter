@@ -54,6 +54,9 @@ GEM
       sass (>= 3.3.4)
     brakeman (4.3.1)
     builder (3.2.3)
+    bullet (5.7.5)
+      activesupport (>= 3.0.0)
+      uniform_notifier (~> 1.11.0)
     byebug (10.0.2)
     capybara (2.18.0)
       addressable
@@ -235,6 +238,7 @@ GEM
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.7.5)
+    uniform_notifier (1.11.0)
     warden (1.2.7)
       rack (>= 1.0)
     web-console (3.5.1)
@@ -257,6 +261,7 @@ PLATFORMS
 DEPENDENCIES
   bootstrap-sass
   brakeman
+  bullet
   byebug
   capybara (~> 2.13)
   carrierwave
