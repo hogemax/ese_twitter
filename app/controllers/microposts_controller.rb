@@ -22,7 +22,8 @@ class MicropostsController < ApplicationController
         session[:hashtag] = params[:id]                      # ハッシュタグが存在すれば
 
         # そのハッシュタグのツイートを全て取得
-        @microposts = Micropost.joins(:hashtags).where(hashtags: { name: params[:id] }).includes(:user).paginate(page: params[:page])
+        #@microposts = Micropost.joins(:hashtags).where(hashtags: { name: params[:id] }).includes(:user).paginate(page: params[:page])
+        @microposts = Micropost.includes(:hashtags, :user).references(:hashtags).where(hashtags: { name: params[:id] }).paginate(page: params[:page])
 
         show_tag_view
       end
