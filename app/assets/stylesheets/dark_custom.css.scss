@@ -1,0 +1,450 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+/* mixins, variables, etc. */
+
+:root {
+  --theme-hue: 10;   //--main-color: #333;
+  --sub-theme-hue: 0;  //--sub-color: #9d9d9d;
+  --link-hover-color: #23D5AB;
+  --dgreen-color: #1eb793;
+  --form-color: #bbbbbb;
+  --normal-text-color: rgb(233, 231, 231);
+  --true-white-color: #fff;
+  --true-black-color: #000;
+  --dgray-color: #808080;
+  --dblack-color: rgb(39, 38, 38); 
+}
+
+$gray-medium-light: #eaeaea; //#808080
+
+@mixin box_sizing {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+/* universal */
+
+html {
+  overflow-y: scroll;
+}
+
+body {
+  padding-top: 60px;
+  /* background-color: var(--main-color); */
+  background-color: hsl(var(--theme-hue), 0%, 20%);
+  border-color: hsl(var(--sub-theme-hue), 0%, 61.6%);
+  small: hsl(var(--sub-theme-hue), 0%, 61.6%);
+  a {
+    color: var(--true-white-color);
+  }
+  a:hover {
+    color: var(--link-hover-color);
+  }
+  h1,h3,p,label {
+    color: var(--normal-text-color);
+  }
+  textarea,
+  input,
+  .form-control {
+    color: var(--true-black-color);
+    background-color: var(--form-color);
+  }
+  .btn-primary,
+  .btn-primary:hover {
+    background-color: var(--dgreen-color);
+  }
+
+  div.stats a:hover {
+    color: var(--link-hover-color);
+  }
+  .pagination li a,
+  .pagination li span {
+    color: var(--true-white-color);
+    background-color: var(--dgray-color);
+  }
+  //.pagination li a:hover,
+  .pagination li span:hover {
+    background-color: var(--dblack-color);
+  }
+  .pagination li a:hover,
+  .pagination li a:focus
+  //,.pagination li a:visited 
+  {
+    color: var(--link-hover-color);
+    background-color: var(--dblack-color);
+  }
+  .pagination li.active span,
+  .pagination li.active span:hover {
+    color: var(--link-hover-color);
+    background-color: var(--dblack-color);
+    border-color: #fff var(--dblack-color);
+  }
+  .pagination li.disabled span,
+  .pagination li.disabled span:hover {
+    background-color: hsl(var(--theme-hue), 0%, 20%);
+  }
+  button.hv_mark_btn,
+  button.hv_mark_btn:hover,
+  .microposts li a.btn.trash_mark,
+  .microposts li a.btn.trash_mark:hover
+  {
+    color: var(--normal-text-color);
+    background-color: hsl(var(--theme-hue), 0%, 20%);
+  }
+  .microposts div.repost-view-panel {
+    background-color: var(--true-black-color);
+  }
+  .modal-content {
+    background-color: hsl(var(--theme-hue), 0%, 20%);
+    div.well {
+      background-color: var(--true-black-color);
+    }
+  }
+  .modal-footer button {
+    color: var(--normal-text-color);
+    background-color: hsl(var(--sub-theme-hue), 0%, 61.6%);
+  }
+}
+
+section {
+  overflow: auto;
+}
+
+textarea {
+  resize: vertical;
+}
+
+.center {
+  text-align: center;
+  h1 {
+    margin-bottom: 10px;
+  }
+}
+
+/* typography */
+
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1;
+}
+
+h1 {
+  font-size: 3em;
+  letter-spacing: -2px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+h2 {
+  font-size: 1.2em;
+  letter-spacing: -1px;
+  margin-bottom: 30px;
+  text-align: center;
+  font-weight: normal;
+  color: $gray-light;
+}
+
+p {
+  font-size: 1.1em;
+  line-height: 1.7em;
+}
+
+
+/* header */
+
+#logo {
+  float: left;
+  margin-right: 10px;
+  font-size: 1.7em;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+  padding-top: 12px;
+  font-weight: bold;
+  line-height: 1;
+  &:hover {
+    color: white;
+    text-decoration: none;
+  }
+}
+
+/* footer */
+
+footer {
+  margin-top: 45px;
+  padding-top: 5px;
+  border-top: 1px solid $gray-medium-light;
+  //color: $gray-light;
+  a {
+    //color: $gray;
+    &:hover {
+      //color: $gray-darker;
+    }
+  }
+  small {
+    float: left;
+  }
+  ul {
+    float: right;
+    list-style: none;
+    li {
+      float: left;
+      margin-left: 10px;
+    }
+  }
+}
+
+/* sidebar */
+
+aside {
+  section {
+    padding: 10px 0;
+    border-top: 1px solid $gray-lighter;
+    &:first-child {
+      border: 0;
+      padding-top: 0;
+    }
+    span {
+      display: block;
+      margin-bottom: 3px;
+      line-height: 1;
+    }
+    h1 {
+      font-size: 1.4em;
+      text-align: left;
+      letter-spacing: -1px;
+      margin-bottom: 3px;
+      margin-top: 0px;
+    }
+  }
+}
+
+.gravatar {
+  float: left;
+  margin-right: 10px;
+}
+
+.stats {
+  overflow: auto;
+  a {
+    float: left;
+    padding: 0 10px;
+    border-left: 1px solid $gray-lighter;
+    color: gray;
+    &:first-child {
+      padding-left: 0;
+      border: 0;
+    }
+    &:hover {
+      text-decoration: none;
+      color: blue;
+    }
+  }
+  strong {
+    display: block;
+  }
+}
+
+.user_avatars {
+  overflow: auto;
+  margin-top: 10px;
+  .gravatar {
+    margin: 1px 1px;
+  }
+}
+
+/* forms */
+
+//ユーザー検索フォーム
+.search_form {
+  display: flex;
+  input {
+    //ボタンサイズのずれ調整
+    margin-bottom: 15px;
+  }
+}
+
+input, textarea, select, .uneditable-input {
+  border: 1px solid #bbb;
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  @include box_sizing;
+}
+
+input {
+  height: auto !important;
+}
+
+#error_explanation {
+  color: #f00;
+  ul {
+    list-style: none;
+    margin: 0 0 18px 0;
+  }
+}
+
+.field_with_errors {
+  @extend .form-group;
+  @extend .has-error;
+  margin-bottom: 0;
+}
+
+/* users index */
+
+.users {
+  list-style: none;
+  margin: 0;
+  li {
+    overflow: auto;
+    padding: 10px 0;
+    border-top: 1px solid $gray-lighter;
+    &:last-child {
+      border-bottom: 1px solid $gray-lighter;
+    }
+  }
+}
+
+/* microposts */
+
+.microposts {
+  list-style: none;
+  margin: 10px 0 0 0;
+
+  li {
+    padding: 10px 0;
+    border-top: 1px solid #e8e8e8;
+
+    .image img {
+      width: 100%;
+    }
+    //ゴミ箱マークの色設定
+    a.btn.trash_mark {
+        color : #000
+    }
+  }
+}
+
+.panel {
+  display: table-cell;
+  padding: 10px;
+}
+
+.content {
+  display: block;
+  color: var(--normal-text-color);
+}
+.timestamp {
+  color: $gray-light;
+}
+.gravatar {
+  float: left;
+  margin-right: 10px;
+}
+aside {
+  textarea {
+    height: 100px;
+    margin-bottom: 5px;
+  }
+}
+//いいね、引用投稿 横並び設定
+.reaction_buttons_container {
+  display: flex;
+
+  //削除リンク、いいね・引用投稿 各ボタンhover時
+  a.hv_mark_btn:hover,
+  button.hv_mark_btn:hover {
+    position: relative;
+    span.u-hiddenVisually {
+      display: inline;
+    }
+  }
+  //フキダシ内容
+  span.u-hiddenVisually {
+    display: none;
+    position: absolute;
+    top: -40px;
+    left: -10px;
+    padding: 10px;
+    border-radius: 6px;
+    color: #fff;
+    background-color: var(--dblack-color);
+  }
+
+  //フキダシ三角板
+  span.u-hiddenVisually:after {
+    top: 100%;
+	  left: 50%;
+    border: solid transparent;
+    content: " ";
+    position: absolute;
+    pointer-events: none;
+    border-top-color: var(--dblack-color);
+    border-width: 5px;
+    margin-left: -5px;
+  }
+}
+
+//postボタンの見た目 通常
+.postButtonDefault {
+  pointer-events: none;
+  opacity: 0;
+  transition: 0.7s all ease-in 0.2s;
+}
+//postボタンの見た目変化用
+.postButtonDefault.btnAttractAttentionOne {
+  pointer-events: visible;
+  opacity: 1;
+  font-weight: bold;
+}
+
+//グラデーション1
+.gradientStyleOne {
+  background: linear-gradient(-75deg, #EE7752, #E73C7E, #23A6D5, #23D5AB);
+  background-size: 800% 800%;
+  animation: GradationOne 3s ease infinite;
+}
+//グラデーション1用アニメーション設定
+@keyframes GradationOne {
+  0% {
+    background-position: 0% 40%
+  }
+  50% {
+    background-position: 100% 30%
+  }
+  100% {
+    background-position: 0% 60%
+  }
+}
+
+//modal の調整
+
+//Repost Title
+h3.modal-title#repostModalLabel {
+  padding: 5px;
+}
+
+/* like */
+
+.like-button, .un-like-button {
+  padding: 10px;
+  border: none;
+  span {
+    vertical-align: text-bottom;
+  }
+}
+
+.fa-red {
+  color: #e54d26;
+}
+
+/* miscellaneous */
+
+.debug_dump {
+  clear: both;
+  float: left;
+  width: 100%;
+  margin-top: 45px;
+  @include box_sizing;
+}
