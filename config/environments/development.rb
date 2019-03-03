@@ -83,4 +83,7 @@ Rails.application.configure do
     Bullet.add_footer   = true # 画面の下部に表示
   end
 
+  #sassc-rails
+  config.sass.inline_source_maps = true
+
 end
