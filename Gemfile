@@ -9,7 +9,8 @@ ruby '2.5.0'
 
 gem 'rails', '~> 5.1.6'
 
-gem 'sqlite3', group: [:development, :test]
+#gem 'sqlite3', group: [:development, :test]
+gem 'sqlite3', '~> 1.3.6', group: [:development, :test]
 gem 'pg', group: :production
 
 gem 'puma', '~> 3.7'
