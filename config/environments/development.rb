@@ -27,8 +27,8 @@ Rails.application.configure do
   end
 
   #問い合わせ機能用の設定
-  s_mail = ENV['SMTP_MAIL']
-  s_pass = ENV['SMTP_PASS']
+  #s_mail = ENV['SMTP_MAIL']
+  #s_pass = ENV['SMTP_PASS']
 
   #config.action_mailer.raise_delivery_errors = false
   config.action_mailer.raise_delivery_errors = true
