@@ -44,6 +44,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem "devise", ">= 4.7.1"
 gem 'omniauth-twitter'
+gem "omniauth-rails_csrf_protection"
 gem 'carrierwave'
 gem 'rmagick'
 gem 'bootstrap-sass'
