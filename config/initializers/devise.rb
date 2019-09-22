@@ -260,6 +260,7 @@ Devise.setup do |config|
   twitter_consumer_key = ENV['TWITTER_CONSUMER_KEY']
   twitter_consumer_secret = ENV['TWITTER_CONSUMER_SECRET']
   config.omniauth :twitter, twitter_consumer_key, twitter_consumer_secret
+  # , callback_url: "https://site_url/users/auth/twitter/callback"
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
