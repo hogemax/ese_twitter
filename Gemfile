@@ -22,6 +22,8 @@ gem 'coffee-rails', '~> 4.2'
 gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 
+gem "loofah", ">= 2.3.1"
+
 gem 'nokogiri', '~> 1.10.4'
 
 group :development, :test do
