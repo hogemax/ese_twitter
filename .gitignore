@@ -25,3 +25,5 @@
 /.envrc
 /public/uploads/tmp/
 /public/uploads/micropost/image/
+
+rails_versions.txt
